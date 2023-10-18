@@ -1,0 +1,39 @@
+---
+- name: My Test Playbook
+  hosts: webservers
+  become: yes
+  tasks:
+  - name: Installing JAVA for RedHat
+    yum:
+      name: java
+      state: present
+    when: ansible_os_family == "RedHat"
+
+  - name: Install JAVA for Debian
+    apt:
+      name: default-jdk
+      state: present
+    when: ansible_os_family == "Debian"
+
+  - name: Downloading Tomcat
+    get_url:
+      url: https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.95/bin/apache-tomcat-8.5.95.tar.gz
+      dest: /opt
+
+  - name: Extracting Tomcat
+    unarchive:
+      src: /opt/apache-tomcat-8.5.95.tar.gz
+      dest: /opt/
+      remote_src: yes
+
+  - name: Providing Execute Permissions
+    file:
+      path: /opt/apache-tomcat-8.5.95/bin/startup.sh
+      mode: 0777
+
+  - name: Starting Tomcat Server
+    shell: nohup ./startup.sh
+    args:
+      chdir: /opt/apache-tomcat-8.5.95/bin
+
+

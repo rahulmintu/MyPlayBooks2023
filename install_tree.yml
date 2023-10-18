@@ -1,0 +1,9 @@
+---
+- name: My Test Playbook
+  hosts: webservers
+  become: yes
+  tasks:
+  - name: Installing Tree Package
+    yum:
+      name: tree
+      state: present

@@ -1,0 +1,9 @@
+---
+- name: My Test Playbook
+  hosts: webservers
+  become: yes
+  tasks:
+  - name: Coping a File
+    copy:
+      src: /home/ansadmin/index.html
+      dest: /home/ansadmin/

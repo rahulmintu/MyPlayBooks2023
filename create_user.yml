@@ -1,0 +1,7 @@
+---
+- name: My Test Playbook
+  hosts: webservers
+  become: yes
+  tasks:
+  - name: creating a user Rohit
+    user: name=rohit

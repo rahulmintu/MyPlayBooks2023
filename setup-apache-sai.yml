@@ -1,0 +1,8 @@
+---
+- name: Installing Apache/Httpd
+  hosts: webservers
+  become: true
+
+  roles:
+  - setup-apache-role
+
